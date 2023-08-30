@@ -7,8 +7,6 @@
 #include <vector>
 
 #include "./generation.hpp"
-#include "./parser.hpp"
-#include "./tokenization.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -26,7 +24,7 @@ int main(int argc, char* argv[])
         contents = contents_stream.str();
     }
 
-    Tokenizer tokenizer(std::move(contents));
+    Tokenizer tokenizer(contents);
     std::vector<Token> tokens = tokenizer.tokenize();
 
     Parser parser(std::move(tokens));

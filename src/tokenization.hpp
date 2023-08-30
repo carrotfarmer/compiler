@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq };
+enum class TokenType { exit, int_lit, semi, open_paren, close_paren, ident, let, eq, plus };
 
 struct Token {
     TokenType type;
@@ -76,12 +76,17 @@ public:
                 tokens.push_back({ .type = TokenType::eq });
                 continue;
             }
+            else if (peek().value() == '+') {
+                consume();
+                tokens.push_back({ .type = TokenType::plus });
+                continue;
+            }
             else if (std::isspace(peek().value())) {
                 consume();
                 continue;
             }
             else {
-                std::cerr << "you messed up dawg" << std::endl;
+                std::cerr << "you screwed up dawg" << std::endl;
                 exit(EXIT_FAILURE);
             }
         }
